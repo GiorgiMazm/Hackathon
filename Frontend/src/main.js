@@ -1,4 +1,6 @@
 import "vuetify/styles"; // Global CSS has to be
+import "@mdi/font/css/materialdesignicons.css";
+
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
