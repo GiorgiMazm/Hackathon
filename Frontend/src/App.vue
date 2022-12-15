@@ -2,7 +2,12 @@
 import HelloWorld from './components/HelloWorld.vue'</script>
 
 <template>
-  <div>
+
+
+  <v-app>
+    <v-card>
+      <v-layout>
+    <div>
     <HelloWorld msg="Hackathon"/>
     <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut autem, cumque, dolores ex, facere hic minima
       molestias numquam odio perspiciatis provident quo reiciendis repellendus tenetur voluptatibus! Aperiam
@@ -11,7 +16,12 @@ import HelloWorld from './components/HelloWorld.vue'</script>
       porro qui saepe tenetur ut.</h2>
 
     <button>create new media</button>
+    <br>
+    <br>
   </div>
+      </v-layout>
+    </v-card>
+  </v-app>
 
 </template>
 
