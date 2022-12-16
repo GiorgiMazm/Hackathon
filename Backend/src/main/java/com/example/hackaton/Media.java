@@ -30,7 +30,7 @@ public class Media {
   private String category;
 
   @Column(name = "body", nullable = false)
-  private String result;
+  private String body;
 
   @Column(name = "author_name", nullable = false)
   private String authorName;
@@ -43,7 +43,7 @@ public class Media {
   public Media(String title, String category, String result, String authorName, Boolean isAccepted) {
     this.title = title;
     this.category = category;
-    this.result = result;
+    this.body = body;
     this.authorName = authorName;
     this.isAccepted = isAccepted;
   }

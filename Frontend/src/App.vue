@@ -40,6 +40,54 @@
           <h1 class="text-h1 text-center">
             Hackathon
           </h1>
+
+          <v-form
+              ref="form"
+              v-model="valid"
+              lazy-validation
+          >
+            <v-text-field
+                v-model="name"
+                :counter="10"
+                :rules="nameRules"
+                label="Name*"
+                required
+            ></v-text-field>
+
+            <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                label="E-mail*"
+                required
+            ></v-text-field>
+
+            <v-text-field
+                v-model="title"
+                label="Betreff*"
+                required
+            ></v-text-field>
+
+            <v-textarea
+                v-model="body"
+                label="Inhalt*"
+                required
+            ></v-textarea>
+
+            <v-text-field
+                v-model="category"
+                :rules="emailRules"
+                label="Category*"
+                required
+            ></v-text-field>
+
+            <v-checkbox
+                v-model="checkbox"
+                :rules="[v => !!v || 'You must be at least 18 to continue!']"
+                label="Are you at least 18?*"
+                required
+            ></v-checkbox>
+
+          </v-form>
         </v-main>
       </v-layout>
     </v-card>
