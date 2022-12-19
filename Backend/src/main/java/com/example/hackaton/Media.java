@@ -26,6 +26,9 @@ public class Media {
   @Column(name = "title", nullable = false)
   private String title;
 
+  @Column(name = "email", nullable = false)
+  private String email;
+
   @Column(name = "category", nullable = false)
   private String category;
 
@@ -40,11 +43,18 @@ public class Media {
 
   public Media() {}
 
-  public Media(String title, String category, String body, String authorName, Boolean isAccepted) {
+  public Media(
+      String title,
+      String category,
+      String body,
+      String authorName,
+      Boolean isAccepted,
+      String email) {
     this.title = title;
     this.category = category;
     this.body = body;
     this.authorName = authorName;
     this.isAccepted = isAccepted;
+    this.email = email;
   }
 }

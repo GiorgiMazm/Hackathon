@@ -95,14 +95,14 @@
                 <p class="text-h4 text--primary">
                   {{ item.title }}
                 </p>
-                <p>category: {{ item.category }}</p>
+                <p>Category: {{ item.category }}</p>
                 <div class="text--primary">
                   {{ item.body }}
                 </div>
                 <hr>
 
                 <p>Media was accepted: {{ item.isAccepted }}</p>
-                <p>Contact Author: {{ item.isAccepted }}</p>
+                <p>Contact Author: {{ item.email }}</p>
               </v-card-text>
               <v-card-actions>
                 <v-btn
@@ -147,6 +147,7 @@ export default {
         title: this.title,
         body: this.body,
         category: this.category,
+        email: this.email,
         isAccepted: false
       }
       mediaCreate(user)
@@ -162,7 +163,7 @@ export default {
 };
 </script>
 <style scoped>
-.cardWidth{
+.cardWidth {
   width: 45%;
 }
 </style>
