@@ -81,10 +81,40 @@
                 required
             ></v-checkbox>
 
-            <button type="submit" @click="createMedia($event)"> send form</button>
+            <button type="submit" @click="createMedia"> send form</button>
 
           </v-form>
-          <button @click="getAllMedia">MEDIA</button>
+
+          <div class="d-flex justify-lg-space-around flex-wrap w-100 mx-auto mt-3">
+            <v-card
+                class="mb-5 cardWidth"
+                v-for="item in mediaArray"
+            >
+              <v-card-text>
+                <div>Media from: {{ item.authorName }}</div>
+                <p class="text-h4 text--primary">
+                  {{ item.title }}
+                </p>
+                <p>category: {{ item.category }}</p>
+                <div class="text--primary">
+                  {{ item.body }}
+                </div>
+                <hr>
+
+                <p>Media was accepted: {{ item.isAccepted }}</p>
+                <p>Contact Author: {{ item.isAccepted }}</p>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                    variant="text"
+                    color="deep-purple-accent-4"
+                >
+                  Learn More
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </div>
+
         </v-main>
       </v-layout>
     </v-card>
@@ -95,7 +125,8 @@
 </template>
 
 <script>
-import {mediaCreate, getAllMedia} from "./mediaService.js";
+import {getMedia, mediaCreate} from "./mediaService.js";
+
 export default {
   data() {
     return {
@@ -104,15 +135,13 @@ export default {
       name: "",
       body: "",
       title: "",
-      category: ""
+      category: "",
+      mediaArray: []
     };
   },
 
   methods: {
-    async getAllMedia() {
-      console.log( await getAllMedia())
-    },
-    createMedia(data) {
+    createMedia() {
       const user = {
         authorName: this.name,
         title: this.title,
@@ -120,11 +149,20 @@ export default {
         category: this.category,
         isAccepted: false
       }
-
-      console.log(mediaCreate(user))
+      mediaCreate(user)
+    },
+    async getAllMedia() {
+      this.mediaArray = await getMedia();
     },
   },
+
+  created() {
+    this.getAllMedia()
+  }
 };
 </script>
 <style scoped>
+.cardWidth{
+  width: 45%;
+}
 </style>

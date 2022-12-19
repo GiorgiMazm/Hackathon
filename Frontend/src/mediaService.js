@@ -6,7 +6,7 @@ export async function mediaCreate(data) {
     });
 }
 
-export async function getAllMedia() {
+export async function getMedia() {
     const response = await fetch('http://localhost:8080/allMedia');
     return await JSON.parse((await response.text()))
 }
