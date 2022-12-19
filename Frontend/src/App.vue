@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
 
   <v-app>
@@ -44,20 +42,16 @@
           <v-form
               class="w-33"
               ref="form"
-              v-model="valid"
-              lazy-validation
           >
             <v-text-field
                 v-model="name"
                 :counter="10"
-                :rules="nameRules"
                 label="Name*"
                 required
             ></v-text-field>
 
             <v-text-field
                 v-model="email"
-                :rules="emailRules"
                 label="E-mail*"
                 required
             ></v-text-field>
@@ -76,7 +70,6 @@
 
             <v-text-field
                 v-model="category"
-                :rules="emailRules"
                 label="Category*"
                 required
             ></v-text-field>
@@ -88,7 +81,10 @@
                 required
             ></v-checkbox>
 
+            <button type="submit" @click="createMedia($event)"> send form</button>
+
           </v-form>
+          <button @click="getAllMedia">MEDIA</button>
         </v-main>
       </v-layout>
     </v-card>
@@ -98,5 +94,37 @@
 
 </template>
 
+<script>
+import {mediaCreate, getAllMedia} from "./mediaService.js";
+export default {
+  data() {
+    return {
+      checkbox: true,
+      email: "",
+      name: "",
+      body: "",
+      title: "",
+      category: ""
+    };
+  },
+
+  methods: {
+    async getAllMedia() {
+      console.log( await getAllMedia())
+    },
+    createMedia(data) {
+      const user = {
+        authorName: this.name,
+        title: this.title,
+        body: this.body,
+        category: this.category,
+        isAccepted: false
+      }
+
+      console.log(mediaCreate(user))
+    },
+  },
+};
+</script>
 <style scoped>
 </style>
