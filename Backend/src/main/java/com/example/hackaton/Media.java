@@ -40,7 +40,7 @@ public class Media {
 
   public Media() {}
 
-  public Media(String title, String category, String result, String authorName, Boolean isAccepted) {
+  public Media(String title, String category, String body, String authorName, Boolean isAccepted) {
     this.title = title;
     this.category = category;
     this.body = body;

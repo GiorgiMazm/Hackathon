@@ -42,6 +42,7 @@
           </h1>
 
           <v-form
+              class="w-33"
               ref="form"
               v-model="valid"
               lazy-validation
