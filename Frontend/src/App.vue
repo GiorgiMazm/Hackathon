@@ -62,7 +62,7 @@
           </v-btn>
 
 
-          <div class="w-50" v-if="loginVisability">
+          <div class="w-50" v-if="loginVisibility">
             <v-text-field
                 v-model="loginInput"
                 label="Login"
@@ -72,8 +72,10 @@
             <v-text-field
                 v-model="passwordInput"
                 label="Password"
+                type="password"
                 required
             ></v-text-field>
+            <p v-if="error" class="text-red">Login or password is incorrect</p>
 
             <v-btn
                 variant="text"
@@ -95,6 +97,7 @@
           <v-form
               class="w-33"
               ref="form"
+              v-if="mediaVisibility"
           >
             <v-text-field
                 v-model="name"
@@ -134,9 +137,27 @@
                 required
             ></v-checkbox>
 
-            <button type="submit" @click="createMedia"> send form</button>
+            <button type="submit" @click="createMedia"> Send form</button>
+
+            <v-btn
+                variant="text"
+                color="deep-purple-accent-4"
+                @click="cancelMedia"
+            >
+              Cancel
+            </v-btn>
+
 
           </v-form>
+
+          <v-btn
+              variant="text"
+              color="deep-purple-accent-4"
+              @click="showMediaForm"
+              v-if="!mediaVisibility"
+          >
+            Create new Media
+          </v-btn>
 
           <div class="d-flex justify-lg-space-around flex-wrap w-100 mx-auto mt-3">
             <v-card
@@ -161,8 +182,9 @@
                 <v-btn
                     variant="text"
                     color="deep-purple-accent-4"
+                    v-if="admin"
                 >
-                  Learn More
+                  Accept
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -191,11 +213,13 @@ export default {
       category: "",
       mediaArray: [],
       login: "superAdmin",
-      password: "fuck",
-      loginVisability: false,
+      password: "superPassword",
+      loginVisibility: false,
       loginButton: true,
       loginInput: "",
       passwordInput: "",
+      mediaVisibility: false,
+      error: false,
       admin: false
 
     };
@@ -218,28 +242,36 @@ export default {
     },
 
     showLogin() {
-      this.loginVisability = true;
+      this.loginVisibility = true;
       this.loginButton = false
     },
     cancelLogin() {
-      this.loginVisability = false;
+      this.loginVisibility = false;
       this.loginButton = true;
       this.loginInput = "";
       this.passwordInput = "";
+      this.error = false;
     },
     loginCheck() {
       if (this.loginInput === this.login && this.passwordInput === this.password) {
-        console.log("work")
         this.admin = true;
         this.cancelLogin();
         this.loginButton = false;
       } else {
-        console.log("doesnt work")
+        this.error = true;
       }
     },
     logout() {
       this.admin = false;
       this.loginButton = true;
+      this.error = false;
+    },
+    showMediaForm() {
+      this.mediaVisibility = true
+    },
+
+    cancelMedia() {
+      this.mediaVisibility = false;
     }
   },
 
