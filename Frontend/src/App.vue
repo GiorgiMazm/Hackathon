@@ -38,6 +38,59 @@
           <h1 class="text-h1 text-center">
             Hackathon
           </h1>
+          <h2 class="text-h2 text-center" v-if="admin">
+            You are Admin
+          </h2>
+
+
+          <v-btn
+              variant="text"
+              color="deep-purple-accent-4"
+              @click="showLogin"
+              v-if="loginButton"
+          >
+            Log in
+          </v-btn>
+
+          <v-btn
+              variant="text"
+              color="deep-purple-accent-4"
+              @click="logout"
+              v-if="admin"
+          >
+            Log out
+          </v-btn>
+
+
+          <div class="w-50" v-if="loginVisability">
+            <v-text-field
+                v-model="loginInput"
+                label="Login"
+                required
+            ></v-text-field>
+
+            <v-text-field
+                v-model="passwordInput"
+                label="Password"
+                required
+            ></v-text-field>
+
+            <v-btn
+                variant="text"
+                color="deep-purple-accent-4"
+                @click="loginCheck"
+            >
+              Log in
+            </v-btn>
+            <v-btn
+                variant="text"
+                color="deep-purple-accent-4"
+                @click="cancelLogin"
+            >
+              Cancel
+            </v-btn>
+          </div>
+
 
           <v-form
               class="w-33"
@@ -102,7 +155,7 @@
                 <hr>
 
                 <p>Media was accepted: {{ item.isAccepted }}</p>
-                <p>Contact Author: {{ item.email }}</p>
+                <p v-if="admin">Contact Author: {{ item.email }}</p>
               </v-card-text>
               <v-card-actions>
                 <v-btn
@@ -136,7 +189,15 @@ export default {
       body: "",
       title: "",
       category: "",
-      mediaArray: []
+      mediaArray: [],
+      login: "superAdmin",
+      password: "fuck",
+      loginVisability: false,
+      loginButton: true,
+      loginInput: "",
+      passwordInput: "",
+      admin: false
+
     };
   },
 
@@ -155,6 +216,31 @@ export default {
     async getAllMedia() {
       this.mediaArray = await getMedia();
     },
+
+    showLogin() {
+      this.loginVisability = true;
+      this.loginButton = false
+    },
+    cancelLogin() {
+      this.loginVisability = false;
+      this.loginButton = true;
+      this.loginInput = "";
+      this.passwordInput = "";
+    },
+    loginCheck() {
+      if (this.loginInput === this.login && this.passwordInput === this.password) {
+        console.log("work")
+        this.admin = true;
+        this.cancelLogin();
+        this.loginButton = false;
+      } else {
+        console.log("doesnt work")
+      }
+    },
+    logout() {
+      this.admin = false;
+      this.loginButton = true;
+    }
   },
 
   created() {
