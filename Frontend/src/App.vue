@@ -62,7 +62,7 @@
           </v-btn>
 
 
-          <div class="w-50" v-if="loginVisibility">
+          <div class="w-50 mx-auto" v-if="loginVisibility">
             <v-text-field
                 v-model="loginInput"
                 label="Login"
@@ -95,7 +95,7 @@
 
 
           <v-form
-              class="w-33"
+              class="w-33 mx-auto"
               ref="form"
               v-if="mediaVisibility"
           >
